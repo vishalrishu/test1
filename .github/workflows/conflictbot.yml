@@ -1,14 +1,19 @@
-name: conflibot
-on: pull_request
+name: PR Conflict Checker
+
+on:
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
-  conflibot:
-    runs-on: self-hosted
+  check_pr_conflicts:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Warn potential conflicts
-        uses: wktk/conflibot@v1
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Run PR Conflict Checker
+        uses: ConflictBot/ConflictBot@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          exclude: |
-            yarn.lock
+          github-token: ${{ secrets.CONFLICT_BOT_ACCESS_TOKEN }}
+          main-branch: main
+          quiet: true
