@@ -9,4 +9,4 @@ jobs:
       - name: Warn potential conflicts
         uses: wktk/conflibot@v1
         with:
-          github-token: ${{ secrets['TOKEN_REPO'] }}
+          github-token: ${{ secrets.TOKEN }}
