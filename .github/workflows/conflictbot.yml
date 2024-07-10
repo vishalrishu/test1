@@ -1,5 +1,5 @@
 name: conflibot
-on: pull_request_target
+on: pull_request
 
 jobs:
   conflibot:
@@ -9,6 +9,6 @@ jobs:
       - name: Warn potential conflicts
         uses: wktk/conflibot@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN || secrets.MY_TOKEN }}
           exclude: |
             yarn.lock
